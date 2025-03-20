@@ -1,0 +1,131 @@
+@use "../abstract/vars";
+@use "../abstract/mixins";
+@use "sass:color";
+
+.products {
+    grid-column: 1 / -1;
+    grid-row: 3 / 4;
+    padding: 4rem 0;
+
+    &-heading {
+        margin: 2rem 0;
+        @include mixins.response(lg){
+            margin: 0;
+            margin-bottom: 2rem;
+        }
+        @include mixins.response(md){
+            margin: 0;
+            margin-bottom: 2.5rem;
+        }
+        &-text {
+            text-align: center;
+            font-size: vars.font-size(lg) + 2rem;
+            color: vars.color(primary);
+            font-weight: 300;
+        }
+    }
+
+    &-wrapper {
+        @include mixins.flexPosition;
+        @include mixins.response(sm){
+            flex-wrap: wrap;
+        }
+    }
+}
+
+.product {
+    position: relative;
+    padding: 0 2rem;
+    @include mixins.response(md){
+        padding: 0 1rem;
+    }
+    @include mixins.response(sm){
+        padding: 0;
+        max-width: 50%;
+    }
+
+    &:hover .product-description {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    &:hover .product-img {
+        opacity: .6;
+    }
+
+    &-img {
+        max-width: 100%;
+        transition: all 1s .2s ease-in-out;
+    }
+
+    &-description {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: color.adjust(vars.color(secondary), $alpha: -0.4);
+        padding: 1.5rem;
+        border: .1rem solid vars.color(primary);
+        border-radius: .5rem;
+        color: vars.color(primary);
+        text-align: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all .75s .25s ease-in-out;
+        @include mixins.response(lg){
+            padding: 0.9rem;
+        }
+
+        &-header {
+            font-size: vars.font-size(xl);
+            font-weight: 400;
+            @include mixins.response(lg){
+                font-size: vars.font-size(md);
+            }
+            @include mixins.response(sm){
+                font-size: vars.font-size(lg);
+            }
+        }
+
+        &-price {
+            font-size: vars.font-size(lg);
+            font-weight: 300;
+            margin: 1rem 0;
+            @include mixins.response(lg){
+                font-size: vars.font-size(sm);
+            }
+            @include mixins.response(sm){
+                font-size: vars.font-size(md);
+            }
+        }
+
+        &-btn {
+            font-size: vars.font-size(sm);
+            text-decoration: none;
+            color: vars.color(secondary);
+            display: block;
+            padding: 1rem 1.2rem;
+            background-color: vars.color(extra);
+            color: vars.color(primary);
+            border-radius: .5rem;
+            transition: all .25s ease-in-out;
+            @include mixins.response(lg){
+                font-size: vars.font-size(xs);
+                padding: 0.5rem 0.65rem;
+            }
+            @include mixins.response(sm){
+                font-size: vars.font-size(sm);
+                padding: 0.75rem 1rem;
+            }
+            
+            &:hover {
+                background-color: vars.color(primary);
+                color: vars.color(extra);
+            }
+        }
+    }
+}
+
+.product-btn {
+    @include mixins.flexPosition;
+}

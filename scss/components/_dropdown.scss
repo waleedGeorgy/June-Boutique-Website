@@ -1,0 +1,53 @@
+@use "sass:color";
+@use "../abstract/vars";
+@use "../abstract/mixins";
+
+.dropdown-li {
+    position: relative;
+    &::after {
+        font-family: "Font Awesome 5 Free";
+        content: '\f078';
+        font-weight: bold;
+    }
+    &:hover .dropdown{
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+.dropdown {
+    position: absolute;
+    top: 1.9rem;
+    right: -2.85rem;
+    width: 10rem;
+    background-color: color.adjust(vars.color(tertiary), $lightness: -5%);
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    text-align: left;
+    border-radius: .25rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    box-shadow: 2px 2px 5px -1px rgba(0,0,0,0.25);
+    @include mixins.navigation;
+    &-item {
+        margin: 1rem 0;
+    }
+    &-link {
+        font-weight: 300;
+        font-size: vars.font-size(xs);
+        &:hover {
+            color: vars.color(primary);
+            font-weight: 400;
+        }
+    }
+    &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: -0.5rem;
+        left: 7.55rem;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid color.adjust(vars.color(tertiary), $lightness: -5%);
+    }
+}

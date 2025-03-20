@@ -1,0 +1,138 @@
+@use "../abstract/mixins";
+@use "../abstract/vars";
+@use "sass:color";
+@use "sass:list";
+
+.footer {
+    grid-column: 1 / -1;
+    grid-row: 4 / 5;
+    @include mixins.flexPosition(space-around);
+    padding: 5rem 0;
+    box-shadow: inset 0 8px 10px rgba(0,0,0,0.5);
+    background-color: vars.color(primary);
+    @include mixins.response(md){
+        flex-wrap: wrap;
+    }
+}
+
+.footer-nav {
+    @include mixins.footerList;
+}
+
+.contact-list {
+    @include mixins.footerList;
+}
+
+.contact {
+    @include mixins.response(md){
+        padding: 0 7rem;
+        margin-top: 3rem;
+        order: 1;
+    }
+
+    &-heading {
+        font-size: vars.font-size(xl);
+        color: vars.color(tertiary);
+        text-align: center;
+        @include mixins.response(md){
+            font-size: vars.font-size(lg);
+        }
+    }
+    
+    &-paragraph {
+        font-size: vars.font-size(md);
+        color: vars.color(tertiary);
+        font-weight: 300;
+        margin: 1rem 0;
+        text-align: center;
+        @include mixins.response(md){
+            font-size: vars.font-size(sm);
+        }
+    }
+    
+    .inputs-group {
+        display: flex;
+
+        input {
+            padding: 1rem;
+            font-size: vars.font-size(xs);
+            margin: 1rem .5rem;
+            border-radius: .25rem;
+            border: none;
+            outline: none;
+            transition: outline .2s ease-in-out;
+
+            &:focus:not([type="submit"]){
+                outline: .3rem solid vars.color(extra);
+            }
+        }
+
+        &-text {
+            width: 50%;
+        }
+
+        &-email {
+            width: 60%;
+        }
+
+        &-btn {
+            width: 40%;
+            color: vars.color(primary);
+            background-color: vars.color(extra);
+            cursor: pointer;
+            font-weight: 600;
+
+            &:hover {
+                background-color: color.adjust(vars.color(primary), $lightness: -7%);
+                color: vars.color(extra);
+                outline: .1rem solid vars.color(extra);
+            }
+        }
+    }
+
+    .social-icons {
+        display: flex;
+        justify-content: space-around;
+        padding: 1rem;
+        box-sizing: border-box;
+
+        &-item {
+            list-style: none;
+        }
+
+        &-link {
+            text-decoration: none;
+            width: 5rem;
+            height: 5rem;
+            border: .1rem solid vars.color(primary);
+            border-radius: 50%;
+            @include mixins.flexPosition;
+            @include mixins.response(sm){
+                width: 4rem;
+                height: 4rem;
+            }
+
+            i {
+                font-size: vars.font-size(lg);
+                @include mixins.response(sm){
+                    font-size: vars.font-size(md);
+                }
+            }
+        }
+    }
+}
+
+$socialMediaColor: 1 #0866FF, 2 #FF0000, 3 #FF0069, 4 #db4a39;
+
+@each $item in $socialMediaColor {
+    .social-icons-item:nth-child(#{list.nth($item, 1)}) .social-icons-link {
+        color: list.nth($item, 2);
+        border: .2rem solid list.nth($item, 2);
+        transition: all .5s ease-in-out;
+
+        &:hover {
+            color: vars.color(primary);
+            background-color: list.nth($item, 2);
+        }
+    }
+}

@@ -1,0 +1,31 @@
+@use "../abstract/mixins";
+
+.first-nav {
+    grid-column: 7 / 10;
+    grid-row: 1 / 2;
+    @include mixins.navigation;
+    @include mixins.response(xl){
+        grid-column: 6 / 10;
+    }
+    @include mixins.response(lg){
+        grid-column: 5 / 10;
+    }
+    @include mixins.response(md){
+        grid-column: 4 / 10;
+    }
+    @include mixins.response(sm){
+        grid-column: 2 / 10;
+    }
+}
+
+.second-nav {
+    grid-column: 3 / 8;
+    grid-row: 3 / 4;
+    @include mixins.navigation;
+    @include mixins.response(lg){
+        grid-column: 2 / 9;
+    }
+    @include mixins.response(md){
+        grid-column: 1 / -1;
+    }
+}

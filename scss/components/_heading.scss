@@ -1,0 +1,19 @@
+@use "../abstract/vars";
+@use "../abstract/mixins";
+
+.heading {
+    grid-column: 1 / -1;
+    grid-row: 2 / 3;
+    text-align: center;
+    &-text {
+        font-family: "Great Vibes", cursive;
+        font-size: vars.font-size(xl) * 2.5;
+        font-weight: lighter;
+        letter-spacing: .75rem;
+        margin-bottom: 2rem;
+        @include mixins.response(sm){
+            font-size: vars.font-size(xl) * 2;
+            letter-spacing: .5rem;
+        }
+    }
+}

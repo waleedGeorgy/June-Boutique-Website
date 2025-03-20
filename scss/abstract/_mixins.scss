@@ -1,0 +1,74 @@
+@use "sass:color";
+@use "vars";
+
+@mixin navigation {
+    &-list {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 100%;
+    }
+
+    &-item {
+        list-style: none;
+    }
+
+    &-link {
+        color: vars.color(primary);
+        text-decoration: none;
+        font-size: vars.font-size(sm);
+        transition: color 200ms ease-in-out;
+
+        &:hover {
+            color: color.adjust(vars.color(primary), $lightness: 33%);
+        }
+    }
+};
+
+@mixin flexPosition($justCont: center, $alignItems: center){
+    display: flex;
+    justify-content: $justCont;
+    align-items: $alignItems;
+};
+
+@mixin footerList {
+    &-heading {
+        font-size: vars.font-size(lg);
+        color: vars.color(tertiary);
+    }
+
+    &-item {
+        list-style: none;
+        margin: 1rem 0;
+    }
+
+    &-link {
+        font-size: vars.font-size(xs);
+        text-decoration: none;
+        color: color.adjust(vars.color(primary), $lightness: 33%);
+        transition: color 200ms ease-in-out;
+        &:hover {
+            color: color.adjust(vars.color(primary), $lightness: 50%);
+        }
+    }
+}
+
+@mixin response($breakpoint) {
+    @if($breakpoint == xl) {
+        @media(max-width: 1200px) {
+            @content;
+        }
+    } @else if($breakpoint == lg) {
+        @media (max-width: 1000px) {
+            @content;
+        }
+    } @else if($breakpoint == md) {
+        @media (max-width: 760px) {
+            @content;
+        }
+    } @else if($breakpoint == sm) {
+        @media (max-width: 560px) {
+            @content;
+        }
+    }
+}

@@ -1,0 +1,69 @@
+@use "../abstract/vars";
+@use "../abstract/mixins";
+
+.btn {
+    width: 16rem;
+    height: 4rem;
+    text-decoration: none;
+    margin-top: 4rem;
+    position: relative;
+    &:hover .btn-background {
+        width: 16rem;
+    }
+    &:hover .btn-text {
+        color: vars.color(secondary);
+        z-index: 20;
+    }
+    &:hover .arrow {
+        transform: translateX(1rem);
+    }
+    &:hover .arrow-line-1 {
+        width: 2rem;
+    }
+    @include mixins.flexPosition(space-around);
+
+    &-background {
+        width: 4rem;
+        height: 4rem;
+        background-color: vars.color(primary);
+        border-radius: 5rem;
+        position: absolute;
+        left: 0;
+        transition: all .4s ease-in-out;
+    }
+
+    &-text {
+        font-size: vars.font-size(xs);
+        text-transform: uppercase;
+        color: vars.color(primary);
+        transition: all .45s ease-in-out;
+    }
+
+    .arrow {
+        transition: all .3s ease-in-out;
+        @include mixins.flexPosition;
+
+        &-line {
+            height: .3rem;
+            background-color: vars.color(secondary);
+            position: absolute;
+            transform-origin: right;
+        }
+
+        &-line-1 {
+            width: 0;
+            transform: translateX(-.7rem);
+            transition: width .4s ease-in-out;
+        }
+
+        &-line-2 {
+            width: 1rem;
+            transform: rotateZ(45deg);
+        }
+        
+        &-line-3 {
+            width: 1rem;
+            transform: rotateZ(-45deg);
+        }
+    }
+}
